@@ -23,11 +23,13 @@ let fruitsJSON = `[
 // преобразование JSON в объект JavaScript
 let fruits = JSON.parse(fruitsJSON);
 
+console.log(fruits);
+
 /*** ОТОБРАЖЕНИЕ ***/
 
 // отрисовка карточек
 const display = () => {
-  // TODO: очищаем fruitsList от вложенных элементов,
+  // TODO (Задача): очищаем fruitsList от вложенных элементов,
   // чтобы заполнить актуальными данными из fruits
 
   for (let i = 0; i < fruits.length; i++) {
