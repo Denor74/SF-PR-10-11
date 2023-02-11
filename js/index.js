@@ -20,10 +20,23 @@ let fruitsJSON = `[
   {"kind": "Тамаринд", "color": "светло-коричневый", "weight": 22}
 ]`;
 
+
+
 // преобразование JSON в объект JavaScript
 let fruits = JSON.parse(fruitsJSON);
 
+
+// Преобразуем объект  fruits в массивы из вложенных свойств объекта 
+let fruits0 = Object.values(fruits[0]);
+let fruits1 = Object.values(fruits[1]);
+let fruits2 = Object.values(fruits[2]);
+let fruits3 = Object.values(fruits[3]);
+let fruits4 = Object.values(fruits[4]);
+
+console.log('------------fruits---------------');
 console.log(fruits);
+console.log('------------fruits0---------------');
+console.log(fruits0);
 
 /*** ОТОБРАЖЕНИЕ ***/
 
