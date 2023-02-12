@@ -11,6 +11,9 @@ const colorInput = document.querySelector('.color__input'); // поле с на�
 const weightInput = document.querySelector('.weight__input'); // поле с весом
 const addActionButton = document.querySelector('.add__action__btn'); // кнопка добавления
 
+console.log('----------------fruitsList-----------------');
+console.log(fruitsList);
+
 // список фруктов в JSON формате
 let fruitsJSON = `[
   {"kind": "Мангустин", "color": "фиолетовый", "weight": 13},
@@ -25,13 +28,24 @@ let fruitsJSON = `[
 // преобразование JSON в объект JavaScript
 let fruits = JSON.parse(fruitsJSON);
 
+// function fruitsListFun() {
+//   for (let i = 0; i < fruits.length; i++){
+//     console.log('---------fruits[i]-------------------');
+//     console.log(fruits[i]);
+//     return fruits[i];
+//   }
+// }
+// fruitsListFun();
+
 
 // Преобразуем объект  fruits в массивы из вложенных свойств объекта 
+
 let fruits0 = Object.values(fruits[0]);
 let fruits1 = Object.values(fruits[1]);
 let fruits2 = Object.values(fruits[2]);
 let fruits3 = Object.values(fruits[3]);
 let fruits4 = Object.values(fruits[4]);
+
 
 console.log('------------fruits---------------');
 console.log(fruits);
@@ -45,9 +59,15 @@ const display = () => {
   // TODO (Задача): очищаем fruitsList от вложенных элементов,
   // чтобы заполнить актуальными данными из fruits
 
+  fruitsList.replaceChildren(); // Очищаем от вложенных элементов 
+
   for (let i = 0; i < fruits.length; i++) {
     // TODO: формируем новый элемент <li> при помощи document.createElement,
     // и добавляем в конец списка fruitsList при помощи document.appendChild
+
+
+
+    
   }
 };
 
