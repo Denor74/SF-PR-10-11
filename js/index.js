@@ -59,15 +59,39 @@ const display = () => {
   // TODO (Задача): очищаем fruitsList от вложенных элементов,
   // чтобы заполнить актуальными данными из fruits
 
-  fruitsList.replaceChildren(); // Очищаем от вложенных элементов 
+  fruitsList.replaceChildren(); // Очищаем все вложенные элементы .fruits__list (список карточек)
 
   for (let i = 0; i < fruits.length; i++) {
     // TODO: формируем новый элемент <li> при помощи document.createElement,
     // и добавляем в конец списка fruitsList при помощи document.appendChild
 
+    // Назначаем переменную в зависимости от цвета фрукта (назначаем переменной название соответсвующего стиля css)
+    console.log('---------fruits[i].color--------------')
+    console.log(fruits[i].color); // проверяем что выводит fruits[i].color
+    let colorFruitCSS = fruits[i].color === 'фиолетовый' ? 'fruit_violet' :
+      fruits[i].color === 'зеленый' ? 'fruit_green' :
+      fruits[i].color === 'розово-красный' ? 'fruit_carmazin' :
+      fruits[i].color === 'желтый' ? 'fruit_yellow' : 'fruit_lightbrown';
+
+    // if (fruits[i].color === 'фиолетовый') {
+    //   let colorFruitCSS = 'fruit_viole'
+    // } else if (fruits[i].color === 'зеленый') {
+    //   let colorFruitCSS = 'fruit_green'
+    // } else if (fruits[i].color === 'розово-красный') {
+    //   let colorFruitCSS = 'fruit_carmazin'
+    // } else if (fruits[i].color === 'желтый') {
+    //   let colorFruitCSS = 'fruit_carmazin'
+    // } else {
+    //   let colorFruitCSS = 'fruit_lightbrown'
+    // }
+
+    console.log('---------colorFruitCSS---------');
+    console.log(colorFruitCSS);
 
 
-    
+
+
+
   }
 };
 
