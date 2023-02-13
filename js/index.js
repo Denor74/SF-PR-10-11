@@ -89,8 +89,9 @@ const display = () => {
     console.log(colorFruitCSS);
 
 
-
-
+let fruitsLi = document.createElement('li');
+fruitsLi.classList.add('fruit__item', colorFruitCSS);
+console.log(fruitsLi);
 
   }
 };
