@@ -1,17 +1,17 @@
 // элементы в DOM можно получить при помощи функции querySelector
-const fruitsList = document.querySelector('.fruits__list'); // список карточек
-const shuffleButton = document.querySelector('.shuffle__btn'); // кнопка перемешивания
-const filterButton = document.querySelector('.filter__btn'); // кнопка фильтрации
-const sortKindLabel = document.querySelector('.sort__kind'); // поле с названием сортировки
-const sortTimeLabel = document.querySelector('.sort__time'); // поле с временем сортировки
-const sortChangeButton = document.querySelector('.sort__change__btn'); // кнопка смены сортировки
-const sortActionButton = document.querySelector('.sort__action__btn'); // кнопка сортировки
-const kindInput = document.querySelector('.kind__input'); // поле с названием вида
-const colorInput = document.querySelector('.color__input'); // поле с названием цвета
-const weightInput = document.querySelector('.weight__input'); // поле с весом
-const addActionButton = document.querySelector('.add__action__btn'); // кнопка добавления
+const fruitsList = document.querySelector(".fruits__list"); // список карточек
+const shuffleButton = document.querySelector(".shuffle__btn"); // кнопка перемешивания
+const filterButton = document.querySelector(".filter__btn"); // кнопка фильтрации
+const sortKindLabel = document.querySelector(".sort__kind"); // поле с названием сортировки
+const sortTimeLabel = document.querySelector(".sort__time"); // поле с временем сортировки
+const sortChangeButton = document.querySelector(".sort__change__btn"); // кнопка смены сортировки
+const sortActionButton = document.querySelector(".sort__action__btn"); // кнопка сортировки
+const kindInput = document.querySelector(".kind__input"); // поле с названием вида
+const colorInput = document.querySelector(".color__input"); // поле с названием цвета
+const weightInput = document.querySelector(".weight__input"); // поле с весом
+const addActionButton = document.querySelector(".add__action__btn"); // кнопка добавления
 
-console.log('----------------fruitsList-----------------');
+console.log("----------------fruitsList-----------------");
 console.log(fruitsList);
 
 // список фруктов в JSON формате
@@ -22,8 +22,6 @@ let fruitsJSON = `[
   {"kind": "Карамбола", "color": "желтый", "weight": 28},
   {"kind": "Тамаринд", "color": "светло-коричневый", "weight": 22}
 ]`;
-
-
 
 // преобразование JSON в объект JavaScript
 let fruits = JSON.parse(fruitsJSON);
@@ -37,20 +35,17 @@ let fruits = JSON.parse(fruitsJSON);
 // }
 // fruitsListFun();
 
+// Преобразуем объект  fruits в массивы из вложенных свойств объекта
 
-// Преобразуем объект  fruits в массивы из вложенных свойств объекта 
+// let fruits0 = Object.values(fruits[0]);
+// let fruits1 = Object.values(fruits[1]);
+// let fruits2 = Object.values(fruits[2]);
+// let fruits3 = Object.values(fruits[3]);
+// let fruits4 = Object.values(fruits[4]);
 
-let fruits0 = Object.values(fruits[0]);
-let fruits1 = Object.values(fruits[1]);
-let fruits2 = Object.values(fruits[2]);
-let fruits3 = Object.values(fruits[3]);
-let fruits4 = Object.values(fruits[4]);
-
-
-console.log('------------fruits---------------');
+console.log("------------fruits---------------");
 console.log(fruits);
-console.log('------------fruits0---------------');
-console.log(fruits0);
+
 
 /*** ОТОБРАЖЕНИЕ ***/
 
@@ -66,12 +61,21 @@ const display = () => {
     // и добавляем в конец списка fruitsList при помощи document.appendChild
 
     // Назначаем переменную в зависимости от цвета фрукта (назначаем переменной название соответсвующего стиля css)
-    console.log('---------fruits[i].color--------------')
+    let fuitsIndex = i;
+    console.log("---------fruits[i]--------------");
+    console.log(fuitsIndex);
+    console.log("---------fruits[i].color--------------");
     console.log(fruits[i].color); // проверяем что выводит fruits[i].color
-    let colorFruitCSS = fruits[i].color === 'фиолетовый' ? 'fruit_violet' :
-      fruits[i].color === 'зеленый' ? 'fruit_green' :
-      fruits[i].color === 'розово-красный' ? 'fruit_carmazin' :
-      fruits[i].color === 'желтый' ? 'fruit_yellow' : 'fruit_lightbrown';
+    let colorFruitCSS =
+      fruits[i].color === "фиолетовый"
+        ? "fruit_violet"
+        : fruits[i].color === "зеленый"
+        ? "fruit_green"
+        : fruits[i].color === "розово-красный"
+        ? "fruit_carmazin"
+        : fruits[i].color === "желтый"
+        ? "fruit_yellow"
+        : "fruit_lightbrown";
 
     // if (fruits[i].color === 'фиолетовый') {
     //   let colorFruitCSS = 'fruit_viole'
@@ -85,14 +89,19 @@ const display = () => {
     //   let colorFruitCSS = 'fruit_lightbrown'
     // }
 
-    console.log('---------colorFruitCSS---------');
+    console.log("---------colorFruitCSS---------");
     console.log(colorFruitCSS);
 
+    let fruitsLi = document.createElement("li");
+    fruitsLi.classList.add("fruit__item", colorFruitCSS);
+    fruitsLi.innerHTML = `<div class="fruit__info">
+<div>index: ${fuitsIndex}</div>
+<div>kind: ${fruits[i].kind}</div>
+<div>color: ${fruits[i].color}</div>
+<div>weight (кг): ${fruits[i].weight}</div>`;
+    fruitsList.appendChild(fruitsLi);
 
-let fruitsLi = document.createElement('li');
-fruitsLi.classList.add('fruit__item', colorFruitCSS);
-console.log(fruitsLi);
-
+    console.log(fruitsLi);
   }
 };
 
@@ -123,7 +132,7 @@ const shuffleFruits = () => {
   fruits = result;
 };
 
-shuffleButton.addEventListener('click', () => {
+shuffleButton.addEventListener("click", () => {
   shuffleFruits();
   display();
 });
@@ -137,15 +146,15 @@ const filterFruits = () => {
   });
 };
 
-filterButton.addEventListener('click', () => {
+filterButton.addEventListener("click", () => {
   filterFruits();
   display();
 });
 
 /*** СОРТИРОВКА ***/
 
-let sortKind = 'bubbleSort'; // инициализация состояния вида сортировки
-let sortTime = '-'; // инициализация состояния времени сортировки
+let sortKind = "bubbleSort"; // инициализация состояния вида сортировки
+let sortTime = "-"; // инициализация состояния времени сортировки
 
 const comparationColor = (a, b) => {
   // TODO: допишите функцию сравнения двух элементов по цвету
@@ -173,11 +182,11 @@ const sortAPI = {
 sortKindLabel.textContent = sortKind;
 sortTimeLabel.textContent = sortTime;
 
-sortChangeButton.addEventListener('click', () => {
+sortChangeButton.addEventListener("click", () => {
   // TODO: переключать значение sortKind между 'bubbleSort' / 'quickSort'
 });
 
-sortActionButton.addEventListener('click', () => {
+sortActionButton.addEventListener("click", () => {
   // TODO: вывести в sortTimeLabel значение 'sorting...'
   const sort = sortAPI[sortKind];
   sortAPI.startSort(sort, fruits, comparationColor);
@@ -187,7 +196,7 @@ sortActionButton.addEventListener('click', () => {
 
 /*** ДОБАВИТЬ ФРУКТ ***/
 
-addActionButton.addEventListener('click', () => {
+addActionButton.addEventListener("click", () => {
   // TODO: создание и добавление нового фрукта в массив fruits
   // необходимые значения берем из kindInput, colorInput, weightInput
   display();
