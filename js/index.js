@@ -127,6 +127,17 @@ const shuffleFruits = () => {
     // вырезаем его из fruits и вставляем в result.
     // ex.: [1, 2, 3], [] => [1, 3], [2] => [3], [2, 1] => [], [2, 1, 3]
     // (массив fruits будет уменьшатся, а result заполняться)
+
+    let fruitsRandom = getRandomInt(0, fruits.length - 1);
+    console.log('-----------------randomFruit------------------');
+    console.log(fruitsRandom);
+    let fruitsRandomArr = fruits.splice(fruitsRandom, 1);
+    result = [...result, ...fruitsRandomArr];
+    console.log('-----------------result------------------');
+    console.log(result);
+    if (fruits === result) {
+      alert('перемешивание не получилось, попробуйте ещё раз!');
+    }
   }
 
   fruits = result;
