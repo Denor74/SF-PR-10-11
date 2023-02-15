@@ -10,21 +10,29 @@ const kindInput = document.querySelector(".kind__input"); // поле с наз�
 const colorInput = document.querySelector(".color__input"); // поле с названием цвета
 const weightInput = document.querySelector(".weight__input"); // поле с весом
 const addActionButton = document.querySelector(".add__action__btn"); // кнопка добавления
+const minweightInput = document.querySelector(".minweight__input"); // данные из поля minweight__input
+const maxweightInput = document.querySelector(".maxweight__input"); // данные из поля maxweight__input
 
-console.log("----------------fruitsList-----------------");
-console.log(fruitsList);
+console.log(minweightInput.value);
+console.log(maxweightInput.value);
+//console.log("----------------fruitsList-----------------");
+//console.log(fruitsList);
 
 // список фруктов в JSON формате
 let fruitsJSON = `[
-  {"kind": "Мангустин", "color": "фиолетовый", "weight": 13},
-  {"kind": "Дуриан", "color": "зеленый", "weight": 35},
-  {"kind": "Личи", "color": "розово-красный", "weight": 17},
-  {"kind": "Карамбола", "color": "желтый", "weight": 28},
-  {"kind": "Тамаринд", "color": "светло-коричневый", "weight": 22}
+  {"kind":"Мангустин","color":"фиолетовый","weight":13},
+  {"kind":"Дуриан","color":"зеленый","weight":35},
+  {"kind":"Личи","color":"розово-красный","weight":17},
+  {"kind":"Карамбола","color":"желтый","weight":28},
+  {"kind":"Тамаринд","color":"светло-коричневый","weight":22}
 ]`;
 
 // преобразование JSON в объект JavaScript
 let fruits = JSON.parse(fruitsJSON);
+
+
+
+
 
 // function fruitsListFun() {
 //   for (let i = 0; i < fruits.length; i++){
@@ -43,8 +51,8 @@ let fruits = JSON.parse(fruitsJSON);
 // let fruits3 = Object.values(fruits[3]);
 // let fruits4 = Object.values(fruits[4]);
 
-console.log("------------fruits---------------");
-console.log(fruits);
+//console.log("------------fruits---------------");
+//console.log(fruits);
 
 
 /*** ОТОБРАЖЕНИЕ ***/
@@ -62,10 +70,10 @@ const display = () => {
 
     // Назначаем переменную в зависимости от цвета фрукта (назначаем переменной название соответсвующего стиля css)
     let fuitsIndex = i;
-    console.log("---------fruits[i]--------------");
-    console.log(fuitsIndex);
-    console.log("---------fruits[i].color--------------");
-    console.log(fruits[i].color); // проверяем что выводит fruits[i].color
+    //console.log("---------fruits[i]--------------");
+    //console.log(fuitsIndex);
+    //console.log("---------fruits[i].color--------------");
+    //console.log(fruits[i].color); // проверяем что выводит fruits[i].color
     let colorFruitCSS =
       fruits[i].color === "фиолетовый"
         ? "fruit_violet"
@@ -89,8 +97,8 @@ const display = () => {
     //   let colorFruitCSS = 'fruit_lightbrown'
     // }
 
-    console.log("---------colorFruitCSS---------");
-    console.log(colorFruitCSS);
+    //console.log("---------colorFruitCSS---------");
+    //console.log(colorFruitCSS);
 
     let fruitsLi = document.createElement("li");
     fruitsLi.classList.add("fruit__item", colorFruitCSS);
@@ -101,7 +109,7 @@ const display = () => {
 <div>weight (кг): ${fruits[i].weight}</div>`;
     fruitsList.appendChild(fruitsLi);
 
-    console.log(fruitsLi);
+    //console.log(fruitsLi);
   }
 };
 
@@ -128,17 +136,28 @@ const shuffleFruits = () => {
     // ex.: [1, 2, 3], [] => [1, 3], [2] => [3], [2, 1] => [], [2, 1, 3]
     // (массив fruits будет уменьшатся, а result заполняться)
 
+    //   Получаем рандомное число из диапозона длинны объекта fruits
     let fruitsRandom = getRandomInt(0, fruits.length - 1);
-    console.log('-----------------randomFruit------------------');
-    console.log(fruitsRandom);
+    // console.log('-----------------randomFruit------------------');
+    // console.log(fruitsRandom);
+
+    // Удаляем из объекта 1 свойтво с индексом  ruitsRandom
     let fruitsRandomArr = fruits.splice(fruitsRandom, 1);
+    // помещаем в новый массив значение с индексом fruitsRandom
     result = [...result, ...fruitsRandomArr];
-    console.log('-----------------result------------------');
-    console.log(result);
-    if (fruits === result) {
+  
+  }
+
+  console.log('-----------------result------------------');
+  console.log(result);
+      console.log('-----------------result.toString()------------------');
+  console.log(JSON.stringify(result));
+  console.log('-----------------fruitsJSON------------------');
+  console.log(fruitsJSON);
+         // Сравниваем перемешались ли карточки относительно начсального значение рпеобразуя массив в строку
+    if (fruitsJSON == JSON.stringify(result)) {
       alert('перемешивание не получилось, попробуйте ещё раз!');
     }
-  }
 
   fruits = result;
 };
@@ -154,6 +173,7 @@ shuffleButton.addEventListener("click", () => {
 const filterFruits = () => {
   fruits.filter((item) => {
     // TODO: допишите функцию
+
   });
 };
 
