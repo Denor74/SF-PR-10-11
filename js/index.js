@@ -154,8 +154,8 @@ const shuffleFruits = () => {
   console.log(JSON.stringify(result));
   console.log('-----------------fruitsJSON------------------');
   console.log(fruitsJSON);
-         // Сравниваем перемешались ли карточки относительно начсального значение рпеобразуя массив в строку
-    if (fruitsJSON == JSON.stringify(result)) {
+         // Сравниваем перемешались ли карточки относительно начального значение преобразуя массив в строку
+    if (fruitsJSON === JSON.stringify(result)) {
       alert('перемешивание не получилось, попробуйте ещё раз!');
     }
 
@@ -171,14 +171,22 @@ shuffleButton.addEventListener("click", () => {
 
 // фильтрация массива
 const filterFruits = () => {
-  fruits.filter((item) => {
+  //fruits.filter((item) => {
     // TODO: допишите функцию
+    fruits.filter((item) => {
+console.log(item);
+      
+       return item.weight >= minweightInput.value && item.weight <= maxweightInput.value;
 
   });
+  
 };
 
 filterButton.addEventListener("click", () => {
   filterFruits();
+
+  console.log('----------------filterFruits()--------------------------');
+  console.log(filterFruits());
   display();
 });
 
