@@ -10,11 +10,12 @@ const kindInput = document.querySelector(".kind__input"); // поле с наз�
 const colorInput = document.querySelector(".color__input"); // поле с названием цвета
 const weightInput = document.querySelector(".weight__input"); // поле с весом
 const addActionButton = document.querySelector(".add__action__btn"); // кнопка добавления
-const minweightInput = document.querySelector(".minweight__input"); // данные из поля minweight__input
-const maxweightInput = document.querySelector(".maxweight__input"); // данные из поля maxweight__input
+const minWeightInput = document.querySelector(".minweight_input"); // данные из поля minweight__input
+const maxWeightInput = document.querySelector(".maxweight_input"); // данные из поля maxweight__input
 
-console.log(minweightInput.value);
-console.log(maxweightInput.value);
+console.log(maxWeightInput.value);
+console.log(isNaN('sdfs'));
+// console.log(maxweightInput.value);
 //console.log("----------------fruitsList-----------------");
 //console.log(fruitsList);
 
@@ -29,10 +30,6 @@ let fruitsJSON = `[
 
 // преобразование JSON в объект JavaScript
 let fruits = JSON.parse(fruitsJSON);
-
-
-
-
 
 // function fruitsListFun() {
 //   for (let i = 0; i < fruits.length; i++){
@@ -53,7 +50,6 @@ let fruits = JSON.parse(fruitsJSON);
 
 //console.log("------------fruits---------------");
 //console.log(fruits);
-
 
 /*** ОТОБРАЖЕНИЕ ***/
 
@@ -145,21 +141,22 @@ const shuffleFruits = () => {
     let fruitsRandomArr = fruits.splice(fruitsRandom, 1);
     // помещаем в новый массив значение с индексом fruitsRandom
     result = [...result, ...fruitsRandomArr];
-  
   }
 
-  console.log('-----------------result------------------');
+  console.log("-----------------result------------------");
   console.log(result);
-      console.log('-----------------result.toString()------------------');
-  console.log(JSON.stringify(result));
-  console.log('-----------------fruitsJSON------------------');
-  console.log(fruitsJSON);
-         // Сравниваем перемешались ли карточки относительно начального значение преобразуя массив в строку
-    if (fruitsJSON === JSON.stringify(result)) {
-      alert('перемешивание не получилось, попробуйте ещё раз!');
-    }
+  //     console.log('-----------------result.toString()------------------');
+  // console.log(JSON.stringify(result));
+  // console.log('-----------------fruitsJSON------------------');
+  // console.log(fruitsJSON);
+  // Сравниваем перемешались ли карточки относительно начального значение преобразуя массив в строку
+  if (fruitsJSON === JSON.stringify(result)) {
+    alert("перемешивание не получилось, попробуйте ещё раз!");
+  } else {
+    fruits = result;
+  }
 
-  fruits = result;
+
 };
 
 shuffleButton.addEventListener("click", () => {
@@ -171,22 +168,46 @@ shuffleButton.addEventListener("click", () => {
 
 // фильтрация массива
 const filterFruits = () => {
+// возвращаем fruits начальное значение
+fruits = JSON.parse(fruitsJSON);
+  console.log(maxWeightInput.value);
+  minW = minWeightInput.value;
+  maxW = maxWeightInput.value;
+  console.log('тип maxWeightInput.value ' + typeof maxWeightInput.value);
+  console.log('тип minWeightInput.value ' + typeof(minWeightInput.value));
+  console.log('тип maxW ' + typeof maxW);
+  console.log('тип minW ' + typeof(minW));
+  console.log(!Number.isInteger(maxWeightInput.value));
+  console.log(!Number.isInteger(minWeightInput.value));
+  console.log(minWeightInput.value > maxWeightInput.value);
   //fruits.filter((item) => {
-    // TODO: допишите функцию
-    fruits.filter((item) => {
-console.log(item);
-      
-       return item.weight >= minweightInput.value && item.weight <= maxweightInput.value;
+  // TODO: допишите функцию
+  // Проверяем на валидность данные из фомы ФИЛЬТРОВАТЬ
+  if (minWeightInput.value > maxWeightInput.value /*|| !Number.isInteger(maxWeightInput.value) || !Number.isInteger(minWeightInput.value)*/) {
+    alert("Введите корректно минимальное и максимальное значение");
+  } else {
+    let fruitsFilter = fruits.filter((item) => {
+      // console.log("minweightInput.value--------maxweightInput.value");
+      // console.log(
+      //   "minweightInput.value" +
+      //     minweightInput.value +
+      //     "maxweightInput.value" + 
+      //     maxweightInput.value
+      // );
 
-  });
-  
+    return item.weight >= minWeightInput.value && item.weight <= maxWeightInput.value;
+    });
+    // console.log('---------------fruitsFilter-----------');
+    // console.log(fruitsFilter);
+    fruits = fruitsFilter;
+  }
 };
 
 filterButton.addEventListener("click", () => {
   filterFruits();
+  // console.log('-------------filterFruits------------------');
+  // console.log(filterFruits);
 
-  console.log('----------------filterFruits()--------------------------');
-  console.log(filterFruits());
   display();
 });
 
