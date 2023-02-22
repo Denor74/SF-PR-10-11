@@ -217,12 +217,16 @@ let sortKind = "bubbleSort"; // инициализация состояния в
 let sortTime = "-"; // инициализация состояния времени сортировки
 
 const comparationColor = (a, b) => {
-  // TODO: допишите функцию сравнения двух элементов по цвету
+  // TODO: допишите функцию сравнения двух элементов по цвету (холроший тон отдельно описать функцию сравнения при сортировке)
+  return a.color === fruits.color ? true : false;
 };
 
 const sortAPI = {
   bubbleSort(arr, comparation) {
     // TODO: допишите функцию сортировки пузырьком
+    
+
+
   },
 
   quickSort(arr, comparation) {
