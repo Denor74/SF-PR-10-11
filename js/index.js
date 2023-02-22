@@ -71,15 +71,15 @@ const display = () => {
     //console.log("---------fruits[i].color--------------");
     //console.log(fruits[i].color); // проверяем что выводит fruits[i].color
     let colorFruitCSS =
-      fruits[i].color === "фиолетовый"
-        ? "fruit_violet"
-        : fruits[i].color === "зеленый"
-        ? "fruit_green"
-        : fruits[i].color === "розово-красный"
-        ? "fruit_carmazin"
-        : fruits[i].color === "желтый"
-        ? "fruit_yellow"
-        : "fruit_lightbrown";
+      fruits[i].color === "фиолетовый" ?
+      "fruit_violet" :
+      fruits[i].color === "зеленый" ?
+      "fruit_green" :
+      fruits[i].color === "розово-красный" ?
+      "fruit_carmazin" :
+      fruits[i].color === "желтый" ?
+      "fruit_yellow" :
+      "fruit_lightbrown";
 
     // if (fruits[i].color === 'фиолетовый') {
     //   let colorFruitCSS = 'fruit_viole'
@@ -168,34 +168,29 @@ shuffleButton.addEventListener("click", () => {
 
 // фильтрация массива
 const filterFruits = () => {
-// возвращаем fruits начальное значение
-fruits = JSON.parse(fruitsJSON);
-  console.log(maxWeightInput.value);
-  minW = minWeightInput.value;
-  maxW = maxWeightInput.value;
-  console.log('тип maxWeightInput.value ' + typeof maxWeightInput.value);
-  console.log('тип minWeightInput.value ' + typeof(minWeightInput.value));
-  console.log('тип maxW ' + typeof maxW);
-  console.log('тип minW ' + typeof(minW));
-  console.log(!Number.isInteger(maxWeightInput.value));
-  console.log(!Number.isInteger(minWeightInput.value));
-  console.log(minWeightInput.value > maxWeightInput.value);
+  // возвращаем fruits начальное значение
+  fruits = JSON.parse(fruitsJSON);
+  //console.log(maxWeightInput.value);
+  // Приводим значения полей min weight и max weight к типу Number для валидации формы
+  let minW = Number(minWeightInput.value);
+  let maxW = Number(maxWeightInput.value);
+  // console.log('тип maxWeightInput.value ' + typeof maxWeightInput.value);
+  // console.log('тип minWeightInput.value ' + typeof(minWeightInput.value));
+  // console.log('тип maxW ' + typeof maxW + ' ' + maxW);
+  // console.log('тип minW ' + typeof(minW)+ ' ' + minW);
+  // console.log(!Number.isFinite(minW));
+  // console.log(!Number.isFinite(maxW));
+  // console.log(minW > maxW);
   //fruits.filter((item) => {
   // TODO: допишите функцию
   // Проверяем на валидность данные из фомы ФИЛЬТРОВАТЬ
-  if (minWeightInput.value > maxWeightInput.value /*|| !Number.isInteger(maxWeightInput.value) || !Number.isInteger(minWeightInput.value)*/) {
+  if (minW > maxW || !Number.isFinite(minW) || !Number.isFinite(maxW) /*|| !Number.isInteger(maxWeightInput.value) || !Number.isInteger(minWeightInput.value)*/ ) {
     alert("Введите корректно минимальное и максимальное значение");
   } else {
     let fruitsFilter = fruits.filter((item) => {
-      // console.log("minweightInput.value--------maxweightInput.value");
-      // console.log(
-      //   "minweightInput.value" +
-      //     minweightInput.value +
-      //     "maxweightInput.value" + 
-      //     maxweightInput.value
-      // );
 
-    return item.weight >= minWeightInput.value && item.weight <= maxWeightInput.value;
+      return item.weight >= minW && item.weight <= maxW;
+
     });
     // console.log('---------------fruitsFilter-----------');
     // console.log(fruitsFilter);
