@@ -13,8 +13,8 @@ const addActionButton = document.querySelector(".add__action__btn"); // кноп
 const minWeightInput = document.querySelector(".minweight_input"); // данные из поля minweight__input
 const maxWeightInput = document.querySelector(".maxweight_input"); // данные из поля maxweight__input
 
-console.log(maxWeightInput.value);
-console.log(isNaN('sdfs'));
+// console.log(maxWeightInput.value);
+// console.log(isNaN('sdfs'));
 // console.log(maxweightInput.value);
 //console.log("----------------fruitsList-----------------");
 //console.log(fruitsList);
@@ -30,6 +30,8 @@ let fruitsJSON = `[
 
 // преобразование JSON в объект JavaScript
 let fruits = JSON.parse(fruitsJSON);
+
+console.log(fruits);
 
 // function fruitsListFun() {
 //   for (let i = 0; i < fruits.length; i++){
@@ -93,8 +95,8 @@ const display = () => {
     //   let colorFruitCSS = 'fruit_lightbrown'
     // }
 
-    //console.log("---------colorFruitCSS---------");
-    //console.log(colorFruitCSS);
+    // console.log("---------colorFruitCSS---------");
+    // console.log(colorFruitCSS);
 
     let fruitsLi = document.createElement("li");
     fruitsLi.classList.add("fruit__item", colorFruitCSS);
@@ -143,8 +145,8 @@ const shuffleFruits = () => {
     result = [...result, ...fruitsRandomArr];
   }
 
-  console.log("-----------------result------------------");
-  console.log(result);
+  // console.log("-----------------result------------------");
+  // console.log(result);
   //     console.log('-----------------result.toString()------------------');
   // console.log(JSON.stringify(result));
   // console.log('-----------------fruitsJSON------------------');
@@ -258,5 +260,42 @@ sortActionButton.addEventListener("click", () => {
 addActionButton.addEventListener("click", () => {
   // TODO: создание и добавление нового фрукта в массив fruits
   // необходимые значения берем из kindInput, colorInput, weightInput
+  let fruitInput = {};
+  let kindInputValue = kindInput.value;
+  let colorInputValue = colorInput.value;
+  let weightInputValue = weightInput.value;
+  const colorViolet = "фиолетовый";
+  const colorGreen = "зеленый";
+  const colorCarmazin = "розово-красный";
+  const colorYellow = "желтый";
+  const colorLightbrown = "светло-коричневый";
+   // для сравнения вводимого цвета с допустимым создаем массив из значений цветов
+  const colorFruit = [colorViolet, colorGreen, colorCarmazin, colorYellow, colorLightbrown];
+  console.log(colorFruit);
+  console.log('Значение indexOf при сравнении с вводимым цветом ', colorFruit.indexOf(colorInputValue));
+  
+  // проверяем поле weight (вес) на целочисленное значение больше нуля
+  if ( Number.isInteger(weightInputValue) || weightInputValue <= 0) {
+    console.log('weightInputValue до алерт', weightInputValue);
+    alert ('Введите целое положительное число в поле weight(вес)');
+    // проверяем правильность ввода в поле цвет
+  } if (colorFruit.indexOf(colorInputValue) == -1) {
+    alert ('Введите цвет фрукта из возможно допустимых: фиолетовый, зеленый, розово-красный, желтый, светло-коричневый');
+  } if (!kindInputValue) {
+    alert ('Введите название фрукта');
+  }
+   else {
+    console.log('kindInput.value ', kindInput.value);
+    console.log('colorInput.value ', colorInput.value);
+    console.log('weightInputValue ', weightInputValue);
+    fruitInput = {kind : kindInputValue, color : colorInputValue, weight: +weightInputValue};
+   
+  }
+
+  const fruitsInputResult = {...fruits, fruitInput};
+  //console.log('fruitsInpfruits ', fruitsInputResult);
+  fruits.push(fruitInput);
+  console.log('fruits.push ', fruits);
   display();
+ 
 });
