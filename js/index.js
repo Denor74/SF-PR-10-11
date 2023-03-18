@@ -285,17 +285,14 @@ addActionButton.addEventListener("click", () => {
     alert ('Введите название фрукта');
   }
    else {
-    console.log('kindInput.value ', kindInput.value);
-    console.log('colorInput.value ', colorInput.value);
-    console.log('weightInputValue ', weightInputValue);
+    // console.log('kindInput.value ', kindInput.value);
+    // console.log('colorInput.value ', colorInput.value);
+    // console.log('weightInputValue ', weightInputValue);
     fruitInput = {kind : kindInputValue, color : colorInputValue, weight: +weightInputValue};
+    const fruitsInputResult = {...fruits, fruitInput};
+    fruits.push(fruitInput);
+    // console.log('fruits.push ', fruits);
+    display();
    
   }
-
-  const fruitsInputResult = {...fruits, fruitInput};
-  //console.log('fruitsInpfruits ', fruitsInputResult);
-  fruits.push(fruitInput);
-  console.log('fruits.push ', fruits);
-  display();
- 
 });
