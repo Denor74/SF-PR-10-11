@@ -223,7 +223,7 @@ filterButton.addEventListener("click", () => {
 
 // начальное значение let sortKind = "bubbleSort"; // инициализация состояния вида сортировки
 // -----------поменял на быструю сортировку - проверяем quckSort -------------------
-let sortKind = "quickSort";
+let sortKind = "bubbleSort";
 console.log('sortKind начальное ', sortKind);
 let sortTime = "-"; // инициализация состояния времени сортировки
 
