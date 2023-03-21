@@ -12,6 +12,17 @@ const weightInput = document.querySelector(".weight__input"); // поле с в�
 const addActionButton = document.querySelector(".add__action__btn"); // кнопка добавления
 const minWeightInput = document.querySelector(".minweight_input"); // данные из поля minweight__input
 const maxWeightInput = document.querySelector(".maxweight_input"); // данные из поля maxweight__input
+const sortTimeOutput = document.querySelector(".sort__time"); // время сортировки sort__time
+
+// для добавления, сортировки создаем переменные с цветами
+const colorViolet = "фиолетовый";
+const colorGreen = "зеленый";
+const colorCarmazin = "розово-красный";
+const colorYellow = "желтый";
+const colorLightbrown = "светло-коричневый";
+ // для сравнения вводимого цвета с допустимым создаем массив из значений цветов
+const colorFruit = [colorViolet, colorGreen, colorCarmazin, colorYellow, colorLightbrown];
+// console.log(colorFruit);
 
 // console.log(maxWeightInput.value);
 // console.log(isNaN('sdfs'));
@@ -139,7 +150,7 @@ const shuffleFruits = () => {
     // console.log('-----------------randomFruit------------------');
     // console.log(fruitsRandom);
 
-    // Удаляем из объекта 1 свойтво с индексом  ruitsRandom
+    // Удаляем из объекта 1 свойтво с индексом  fruitsRandom
     let fruitsRandomArr = fruits.splice(fruitsRandom, 1);
     // помещаем в новый массив значение с индексом fruitsRandom
     result = [...result, ...fruitsRandomArr];
@@ -214,20 +225,32 @@ let sortKind = "bubbleSort"; // инициализация состояния в
 let sortTime = "-"; // инициализация состояния времени сортировки
 
 const comparationColor = (a, b) => {
-  // TODO: допишите функцию сравнения двух элементов по цвету (холроший тон отдельно описать функцию сравнения при сортировке)
-  return a.color === fruits.color ? true : false;
+  // TODO: допишите функцию сравнения двух элементов по цвету (хороший тон отдельно описать функцию сравнения при сортировке)
+  return a.color > b.color ? true : false;
 };
 
 const sortAPI = {
   bubbleSort(arr, comparation) {
     // TODO: допишите функцию сортировки пузырьком
-    
+    const n = arr.length;
+// -----------------------------------------------
+    for (let i = 0; i < n-1; i++) {
+      for (let j = 0; j < n - 1 - i; j++) {
+        if (comparation(arr[j], arr[j+1])) {
+          let temp = arr[j+1];
+          arr[j+1] = arr[j];
+          arr[j] = temp;
+        }
+      }
+    }
 
-
+// ---------------------------------
   },
 
   quickSort(arr, comparation) {
     // TODO: допишите функцию быстрой сортировки
+
+
   },
 
   // выполняет сортировку и производит замер времени
@@ -237,6 +260,7 @@ const sortAPI = {
     const end = new Date().getTime();
     sortTime = `${end - start} ms`;
   },
+  
 };
 
 // инициализация полей
@@ -251,8 +275,11 @@ sortActionButton.addEventListener("click", () => {
   // TODO: вывести в sortTimeLabel значение 'sorting...'
   const sort = sortAPI[sortKind];
   sortAPI.startSort(sort, fruits, comparationColor);
+  console.log('sortTime ', sortTime);
+  
   display();
   // TODO: вывести в sortTimeLabel значение sortTime
+  sortTimeOutput.innerHTML = sortTime;
 });
 
 /*** ДОБАВИТЬ ФРУКТ ***/
@@ -264,14 +291,9 @@ addActionButton.addEventListener("click", () => {
   let kindInputValue = kindInput.value;
   let colorInputValue = colorInput.value;
   let weightInputValue = weightInput.value;
-  const colorViolet = "фиолетовый";
-  const colorGreen = "зеленый";
-  const colorCarmazin = "розово-красный";
-  const colorYellow = "желтый";
-  const colorLightbrown = "светло-коричневый";
-   // для сравнения вводимого цвета с допустимым создаем массив из значений цветов
-  const colorFruit = [colorViolet, colorGreen, colorCarmazin, colorYellow, colorLightbrown];
-  console.log(colorFruit);
+
+  // цвета вынес в глобальные переменные
+
   console.log('Значение indexOf при сравнении с вводимым цветом ', colorFruit.indexOf(colorInputValue));
   
   // проверяем поле weight (вес) на целочисленное значение больше нуля
@@ -289,7 +311,7 @@ addActionButton.addEventListener("click", () => {
     // console.log('colorInput.value ', colorInput.value);
     // console.log('weightInputValue ', weightInputValue);
     fruitInput = {kind : kindInputValue, color : colorInputValue, weight: +weightInputValue};
-    const fruitsInputResult = {...fruits, fruitInput};
+    //добавляем в объект fruits новый фрукт
     fruits.push(fruitInput);
     // console.log('fruits.push ', fruits);
     display();
