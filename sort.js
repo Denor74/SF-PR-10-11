@@ -45,7 +45,7 @@ const sortAPI = {
           rightArr.push(arr[i]);
       }
   }
-  return [...this.quickSort(leftArr), key, ...this.quickSort(rightArr)];
+  return [...quickSort(leftArr), key, ...quickSort(rightArr)];
 
   },
 
