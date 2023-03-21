@@ -221,7 +221,10 @@ filterButton.addEventListener("click", () => {
 
 /*** СОРТИРОВКА ***/
 
-let sortKind = "bubbleSort"; // инициализация состояния вида сортировки
+// начальное значение let sortKind = "bubbleSort"; // инициализация состояния вида сортировки
+// -----------поменял на быструю сортировку - проверяем quckSort -------------------
+let sortKind = "quickSort";
+console.log('sortKind начальное ', sortKind);
 let sortTime = "-"; // инициализация состояния времени сортировки
 
 const comparationColor = (a, b) => {
@@ -249,7 +252,22 @@ const sortAPI = {
 
   quickSort(arr, comparation) {
     // TODO: допишите функцию быстрой сортировки
-
+    const n = arr.length;
+    if (n < 2) {
+      return arr;
+      }
+  const key = arr[n - 1];
+  const leftArr = [];
+  const rightArr = [];
+  for (let i = 0; i < n - 1; i++) {
+      if ((comparation(arr[i], key)) ) {
+          leftArr.push(arr[i]);
+      }
+      else {
+          rightArr.push(arr[i]);
+      }
+  }
+  return [...quickSort(leftArr), key, ...quickSort(rightArr)];
 
   },
 
@@ -264,18 +282,29 @@ const sortAPI = {
 };
 
 // инициализация полей
-sortKindLabel.textContent = sortKind;
-sortTimeLabel.textContent = sortTime;
+sortKindLabel.textContent = sortKind; // выводит в HTML метод сортировки
+sortTimeLabel.textContent = sortTime;// выводит в HTML время сортировки
 
 sortChangeButton.addEventListener("click", () => {
   // TODO: переключать значение sortKind между 'bubbleSort' / 'quickSort'
+// if (sortKind = "bubbleSort") {
+//   console.log('sortKind ', sortKind);
+//   sortKind = "quickSort";
+//   console.log('sortKind смена ', sortKind);
+// }
+//   else {
+//   sortKind = "bubbleSort";
+//   }
+// return sortKind;
+
 });
 
 sortActionButton.addEventListener("click", () => {
   // TODO: вывести в sortTimeLabel значение 'sorting...'
   const sort = sortAPI[sortKind];
+  // console.log('sort ', sort);
   sortAPI.startSort(sort, fruits, comparationColor);
-  console.log('sortTime ', sortTime);
+  // console.log('sortTime ', sortTime);
   
   display();
   // TODO: вывести в sortTimeLabel значение sortTime
